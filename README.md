@@ -79,6 +79,35 @@ const comments = document.getElementById('comments');
 comments.insertAdjacentHTML('beforeend', `<p class="comment">${commentContent}</p>`);
 ```
 
+## Updating CSS classes
+
+Adding, removing or toggling a CSS class on a DOM element is something quite common in a JavaScript app. With jQuery, we would use:
+
+```js
+$(selector).addClass('bold');
+$(selector).removeClass('bold');
+$(selector).toggleClass('bold');
+```
+
+And this would apply the change to **all** elements matching the given `selector`.
+
+Without jQuery, you can use [`classList`](https://developer.mozilla.org/en/docs/Web/API/Element/classList):
+
+```js
+// For one element selected with `getElementById` or `querySelector`
+element.classList.add('bold');
+element.classList.remove('bold');
+element.classList.toggle('bold');
+
+// For multiple elements selected with `querySelectorAll`:
+elements.forEach((element) => {
+  element.classList.add('bold');
+  // etc.
+});
+```
+
+See? We just used [Array.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)!
+
 ## Event listeners
 
 JavaScript lets your bring dynamic behavior to your webpage. The simplest example we can take is having an `alert` pop up when click on a button.
