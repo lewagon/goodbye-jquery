@@ -190,5 +190,6 @@ You can notice the `fetch()` second argument is a hash using more straightforwar
 
 Here are some useful resources you might want to read:
 
-- [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
+- [You don't need jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery)
+- [You might not need jQuery](http://youmightnotneedjquery.com/)
 - [A year without jQuery](http://blog.wearecolony.com/a-year-without-jquery/)
