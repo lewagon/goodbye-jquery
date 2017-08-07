@@ -106,14 +106,56 @@ button.addEventListener('click', (event) => {
 
 To get information on the clicked element, you can use `event.target` inside the event listener callback. But what was that `=>`? Well, it is called an [arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions). Those are great to preserve `this` and get rid of the `var that = this` trick. Wes Bos did a [great post and video](http://wesbos.com/javascript-arrow-functions/) on the topic.
 
+## AJAX
 
-## TODO
+When you want to do AJAX, the original implementation relies on [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest), but nobody wants to use that. jQuery solved this problem ten years ago introducing the `$.ajax` method with its two handy shortcuts `$.get` and `$.post`:
 
-Coming very soon:
+```js
+// GET request
+$.ajax({
+  url: "https://swapi.co/api/people/",
+  type: "GET"
+  success: function(data) {
+    console.log(data);
+  }
+});
 
-- [x] [Arrow functions](http://wesbos.com/javascript-arrow-functions/)
-- [x] Event listeners
-- [ ] AJAX
+// POST request
+const data = { name: "a name", email: "an@email.com" };
+$.ajax({
+  url: url,
+  type: "POST",
+  data: data,
+  success: function(data) {
+    console.log(data);
+  }
+});
+```
+
+With modern browsers, we can rely on [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) which provides a nicer API than raw `XMLHttpRequest`.
+
+```js
+// GET request
+fetch("https://swapi.co/api/people/")
+  .then(response => response.json())
+  .then((data) => {
+    console.log(data);
+  });
+
+// POST request
+const data = { name: "a name", email: "an@email.com" };
+fetch(url, {
+  method: 'POST',
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then((data) => {
+  console.log(data);
+});
+```
+
+You can notice the `fetch()` second argument is a hash using more straightforward key names. Parts of the HTTP request are outlined: the method (or verb), the headers and the body.
 
 ## Resources
 
@@ -121,5 +163,3 @@ Here are some useful resources you might want to read:
 
 - [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
 - [A year without jQuery](http://blog.wearecolony.com/a-year-without-jquery/)
-
-
