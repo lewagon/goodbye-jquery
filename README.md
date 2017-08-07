@@ -34,7 +34,7 @@ The alternative is now to use three standard DOM methods:
 - [`Element.querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll)
 
 ```js
-const lead = document.getElementById('lead');  // ⚠️   no #
+const lead = document.getElementById('lead');  // ⚠️ no #
 const firstRedItem = document.querySelector('.red');
 const greenListItems = document.querySelectorAll('li.green');
 ```
@@ -79,12 +79,40 @@ const comments = document.getElementById('comments');
 comments.insertAdjacentHTML('beforeend', `<p class="comment">${commentContent}</p>`);
 ```
 
+## Event listeners
+
+JavaScript lets your bring dynamic behavior to your webpage. The simplest example we can take is having an `alert` pop up when click on a button.
+
+```html
+<button id="useless-btn">Click me!</button>
+```
+
+With jQuery, we would use the `.on()` method (or one of its shortcuts):
+
+```js
+$('#useless-btn').on('click', function(event) {
+  alert('Thanks for clicking!');
+});
+```
+
+The modern DOM gives you [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) to play with:
+
+```js
+const button = document.getElementById('useless-btn');
+button.addEventListener('click', (event) => {
+  alert('Thanks for clicking!');
+});
+```
+
+To get information on the clicked element, you can use `event.target` inside the event listener callback. But what was that `=>`? Well, it is called an [arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions). Those are great to preserve `this` and get rid of the `var that = this` trick. Wes Bos did a [great post and video](http://wesbos.com/javascript-arrow-functions/) on the topic.
+
+
 ## TODO
 
 Coming very soon:
 
-- [ ] [Arrow functions](http://wesbos.com/javascript-arrow-functions/)
-- [ ] Event listeners
+- [x] [Arrow functions](http://wesbos.com/javascript-arrow-functions/)
+- [x] Event listeners
 - [ ] AJAX
 
 ## Resources
