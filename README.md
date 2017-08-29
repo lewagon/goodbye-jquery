@@ -135,6 +135,25 @@ button.addEventListener('click', (event) => {
 
 To get information on the clicked element, you can use `event.target` inside the event listener callback. But what was that `=>`? Well, it is called an [arrow function](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions). Those are great to preserve `this` and get rid of the `var that = this` trick. Wes Bos did a [great post and video](http://wesbos.com/javascript-arrow-functions/) on the topic.
 
+## Dispatching an event
+
+Sometimes you manually need to trigger an event on an element. In jQuery, that's something you could do on links, buttons or forms:
+
+```js
+$('#a-button').click();
+$('#a-form').submit();
+```
+
+Without jQuery, you will rely on [`EventTarget.dispatchEvent()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent):
+
+```js
+const button = document.getElementById('a-button');
+button.dispatchEvent(new Event('click'));
+
+const form = document.getElementById('a-form');
+form.dispatchEvent(new Event('submit'));
+```
+
 ## AJAX
 
 When you want to do AJAX, the original implementation relies on [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest), but nobody wants to use that. jQuery solved this problem ten years ago introducing the `$.ajax` method with its two handy shortcuts `$.get` and `$.post`:
